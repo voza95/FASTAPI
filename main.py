@@ -1,7 +1,15 @@
+from typing import Optional
 from fastapi import FastAPI
 from fastapi.params import Body
+from pydantic import BaseModel
 
 app = FastAPI()
+
+class Post(BaseModel):
+    title: str
+    content: str
+    published: bool = True
+    rating: Optional[int] = None
 
 # async is optional
 @app.get("/")
@@ -16,7 +24,10 @@ def get_posts():
     return {"data":"This your post"}
 
 @app.post("/createpost")
-def create_post(payLoad: dict = Body(...)):
+def create_post(new_post: Post):
     # Extract all the fields from the body convert it into dictonary and save it in variable name payLoad.
-    print(payLoad)
-    return {"new_post": f"title {payLoad['title']}", "content": f"{payLoad['content']}"}
+    print(new_post)
+    # Convert pydantic to dict
+    print(new_post.dict())
+    return {"data":new_post.content}
+# title str, content str
