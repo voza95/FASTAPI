@@ -39,3 +39,18 @@ def create_post(new_post: Post):
     my_post.append(post_dict)
     return {"data": post_dict}
 # title str, content str
+
+
+def find_post(id):
+    for p in my_post:
+        if p['id'] == id:
+            return p
+            break
+    return {"result": "No Data was found with this ID"}
+
+# 793146
+@app.get("/posts/{id}")
+def get_post(id: int):
+    print(id)
+    post = find_post(id)
+    return {"post_details": post}
