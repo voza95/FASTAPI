@@ -34,6 +34,7 @@ def find_post(id):
 @app.get("/")
 async def root():
     # To run the app use cmd -> uvicorn main:app --reload
+    # After reformat of code -> uvicorn app.main:app --reload
     # main is from class name and app is from the veriable
     return {"message" : "Hello World!!!"}
 
