@@ -28,7 +28,7 @@ async def root():
 def get_posts():
     return {"data": my_post}
 
-@app.post("/posts")
+@app.post("/posts", status_code=status.HTTP_201_CREATED)
 def create_post(new_post: Post):
     # Extract all the fields from the body convert it into dictonary and save it in variable name payLoad.
     print(new_post)
